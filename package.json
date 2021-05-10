@@ -1,0 +1,39 @@
+{
+  "name": "vue-create",
+  "version": "1.0.0",
+  "description": "A Vue CLI tool for quick component creation.",
+  "main": "./bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nolia-Inc/vue-create.git"
+  },
+  "keywords": [
+    "vue",
+    "vue-create",
+    "cli",
+    "vue-cli",
+    "component",
+    "angular-cli",
+    "@vue",
+    "command",
+    "line",
+    "interface"
+  ],
+  "author": "Austin Henderson, Nolia Inc.",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Nolia-Inc/vue-create/issues"
+  },
+  "homepage": "https://github.com/Nolia-Inc/vue-create#readme",
+  "bin": {
+    "vue-create": "./bin/index.js"
+  },
+  "dependencies": {
+    "boxen": "^4.0.0",
+    "chalk": "^2.4.2",
+    "yargs": "^13.2.4"
+  }
+}
