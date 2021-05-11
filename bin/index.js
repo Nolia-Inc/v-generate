@@ -2,19 +2,18 @@
 
 const yargs = require('yargs');
 const chalk = require('chalk');
+const inquirer = require('inquirer');
 const { writeFileSync, existsSync, mkdirSync } = require('fs');
 const { javascript, typescript } = require('./vue-template');
 
 function setOptions() {
-  return yargs
+  const options = yargs
     .usage('Usage: vue-create [options] --name <component-name>')
     .option('g', { alias: 'global', describe: 'Will attempt to add the component to the global environment [disabled]', type: 'boolean' })
     .option('t', { alias: 'type', describe: 'Use a specific dialect of JavaScript [TS, JS]. Leaving this blank will result in JS' })
     .option('s', { alias: 'style', describe: 'Specifies the styling framework [CSS, SCSS]. Leaving this blank will result in CSS' })
     .option('n', { alias: 'name', describe: 'Specifies the name of the created component. We be created exactly as described' }).argv;
-}
 
-function checkForErrors(options) {
   if (!options.name) {
     throw new Error(`Missing required argument ${chalk.yellow('<name>')}.`);
   }
@@ -38,22 +37,24 @@ function checkForErrors(options) {
   return options;
 }
 
-function checkPathExistsAndCreateIt(name) {
-  const pathsToFile = name.split('/');
-  pathsToFile.unshift('src');
-  pathsToFile.pop();
+async function doesFileAlreadyExist(pathToFile) {
+  const pathToFileWithBase = `src/${pathToFile}`;
 
-  if (pathsToFile.length <= 1) {
-    return;
+  if (existsSync(`${pathToFileWithBase}.vue`)) {
+    const { overwrite } = await inquirer.prompt({ type: 'confirm', message: 'A file already exists in the specified location with the same name. Do you want to overwrite it?', name: 'overwrite' });
+
+    return overwrite;
   }
 
-  const directory = pathsToFile.join('/');
+  return true;
+}
+
+function checkPathExistsAndCreateIt(name) {
+  const directory = `src/${name.split('/').slice(0, name.split('/').length - 1)}`;
 
   if (!existsSync(directory)) {
     mkdirSync(directory, { recursive: true });
   }
-
-  return [directory, name.split('/')[name.split('/').length - 1]];
 }
 
 function createFile(options, path) {
@@ -67,19 +68,22 @@ function logError(e) {
   console.log(`\n${chalk.red(e.message)}\n`);
 }
 
-try {
-  let options = setOptions();
-  options = checkForErrors(options);
+(async function main() {
+  try {
+    let options = setOptions();
+    const overwrite = await doesFileAlreadyExist(options.name);
 
-  const [path, name] = checkPathExistsAndCreateIt(options.name);
+    if (!overwrite) {
+      throw new Error(chalk.yellow('No component was created'));
+    }
 
-  options.name = name;
+    checkPathExistsAndCreateIt(options.name);
 
-  if (!path) {
-    throw new Error(`${chalk.yellow('No component was created.')}`);
+    const path = `src/${options.name.split('/').slice(0, options.name.split('/').length - 1)}`;
+    options.name = options.name.split('/').slice(-1)[0];
+
+    createFile(options, path);
+  } catch (e) {
+    logError(e);
   }
-
-  createFile(options, path);
-} catch (e) {
-  logError(e);
-}
+})();
