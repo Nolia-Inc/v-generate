@@ -1,6 +1,6 @@
 {
   "name": "v-generate",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "A Vue CLI tool for quick component creation.",
   "main": "./bin/index.js",
   "scripts": {
@@ -13,6 +13,7 @@
   "keywords": [
     "vue",
     "vue-create",
+    "v-generate",
     "cli",
     "vue-cli",
     "component",
@@ -29,7 +30,7 @@
   },
   "homepage": "https://github.com/Nolia-Inc/vue-create#readme",
   "bin": {
-    "vue-create": "./bin/index.js"
+    "v-generate": "./bin/index.js"
   },
   "dependencies": {
     "boxen": "^4.0.0",

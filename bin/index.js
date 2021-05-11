@@ -8,7 +8,7 @@ const { javascript, typescript } = require('./vue-template');
 
 function setOptions() {
   const options = yargs
-    .usage('Usage: vue-create [options] --name <component-name>')
+    .usage('Usage: v-generate [options] --name <component-name>')
     .option('g', { alias: 'global', describe: 'Will attempt to add the component to the global environment [disabled]', type: 'boolean' })
     .option('t', { alias: 'type', describe: 'Use a specific dialect of JavaScript [TS, JS]. Leaving this blank will result in JS' })
     .option('s', { alias: 'style', describe: 'Specifies the styling framework [CSS, SCSS]. Leaving this blank will result in CSS' })
