@@ -34,6 +34,7 @@
   "dependencies": {
     "boxen": "^4.0.0",
     "chalk": "^2.4.2",
+    "inquirer": "^8.0.0",
     "yargs": "^13.2.4"
   }
 }
