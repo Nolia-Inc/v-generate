@@ -1,4 +1,4 @@
-# vue-create
+# v-generate
 
 > A command-line tool for dynamically creating Vue.js component files.
 
@@ -32,25 +32,28 @@ Start with installing the command globally on your local machine:
 To install and set up the library, run:
 
 ```sh
-$ npm install -g vue-create
+$ npm install -g v-generate
 ```
 
 ## Usage
 
 > Example with all parameters
+
 ```sh
-$ vue-create --name <component-name> --type <javascript dialect> --style <style dialect>
+$ v-generate --name <component-name> --type <javascript dialect> --style <style dialect>
 ```
 
 > Simplest example for usage
+
 ```sh
-$ vue-create -n <component-name>
+$ v-generate -n <component-name>
 ```
 
 > Help menu
+
 ```sh
-$ vue-create --help
-Usage: create [options] --name <component-name>
+$ v-generate --help
+Usage: v-generate [options] --name <component-name>
 
 Options:
   --help        Show help
@@ -63,4 +66,4 @@ Options:
 
 ## Authors
 
-* **Austin Henderson** - *Initial work and Continued support* - [austinhenderson19](https://github.com/austinhenderson19)
+- **Austin Henderson** - _Initial work and Continued support_ - [austinhenderson19](https://github.com/austinhenderson19)
